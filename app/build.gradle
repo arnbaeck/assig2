@@ -24,6 +24,7 @@ dependencies {
     implementation 'org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.4.0.202211300538-r'
     // GPG support for JGit based on BouncyCastle (commit signing)
     implementation 'org.eclipse.jgit:org.eclipse.jgit.gpg.bc:6.4.0.202211300538-r'
+    implementation 'org.testng:testng:7.1.0'
 
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'

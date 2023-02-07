@@ -12,18 +12,16 @@ import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.TransportException;
 import org.eclipse.jgit.lib.Ref;
 
-
 public class App {
-    public static void main(String[] args) throws InvalidRemoteException, TransportException, GitAPIException {
-       Git r = Git.cloneRepository()
-                .setURI("https://github.com/arnbaeck/assig2")
-                //.setDirectory(new File("")) return status info, "clone failed because uri is not valid"
-                .setBranchesToClone(Arrays.asList("refs/heads/main"))
-                //.setNoCheckout(true)
-                .call();
+    public static void main(String[] args) {
+        try {
+            model.cloneRepo("https://github.com/arnbaeck/assig2", "testing11");
+        }catch (InvalidRemoteException e){
+            e.printStackTrace();
+        }catch (GitAPIException e){
+            e.printStackTrace();
+        }
 
-        for (Ref f : r.branchList().setListMode(ListBranchCommand.ListMode.ALL).call())
-            System.out.println("found branch " + f.getName());
 
     }
 

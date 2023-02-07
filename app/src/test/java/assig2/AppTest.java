@@ -3,12 +3,41 @@
  */
 package assig2;
 
+import org.eclipse.jgit.errors.TransportException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.io.File;
+import java.util.Arrays;
+
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.ListBranchCommand;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.InvalidRemoteException;
+import org.eclipse.jgit.lib.Ref;
+
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    /**
+     * This tests to check if the URI is wrong. Meaning it is not available or does not exist.
+     * The method clone repo takes an URI and branch name as parameters.
+     */
+    @Test void wrongURI() {
+        Exception ex = assertThrows(GitAPIException.class, () -> {
+            model.cloneRepo("https://github.com/arnbaeck/assig2222", "testing1");
+        });
     }
+    /**
+     * This tests to check if the Branch is wrong. Meaning it does not exist or is mispelled.
+     * The method clone repo takes an URI and branch name as parameters.
+     */
+    @Test void wrongBranch() {
+        Exception ex = assertThrows(GitAPIException.class, () -> {
+            model.cloneRepo("https://github.com/arnbaeck/assig2", "testing111");
+        });
+    }
+
+    @Test void cloneTest() {
+        
+    }
+
 }
