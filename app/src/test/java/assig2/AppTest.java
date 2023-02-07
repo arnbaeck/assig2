@@ -6,7 +6,8 @@ package assig2;
 import org.eclipse.jgit.errors.TransportException;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.io.File;
+
+import java.io.*;
 import java.util.Arrays;
 
 import org.eclipse.jgit.api.Git;
@@ -21,7 +22,7 @@ class AppTest {
      * This tests to check if the URI is wrong. Meaning it is not available or does not exist.
      * The method clone repo takes an URI and branch name as parameters.
      */
-    @Test void wrongURI() {
+    @Test void wrongURI() throws GitAPIException {
         Exception ex = assertThrows(GitAPIException.class, () -> {
             model.cloneRepo("https://github.com/arnbaeck/assig2222", "testing1");
         });
@@ -30,14 +31,22 @@ class AppTest {
      * This tests to check if the Branch is wrong. Meaning it does not exist or is mispelled.
      * The method clone repo takes an URI and branch name as parameters.
      */
-    @Test void wrongBranch() {
+    @Test void wrongBranch() throws GitAPIException {
         Exception ex = assertThrows(GitAPIException.class, () -> {
             model.cloneRepo("https://github.com/arnbaeck/assig2", "testing111");
         });
     }
-
-    @Test void cloneTest() {
-        
+    /**
+     *Test if a successful clone is made by checking a key word in a txt file. If the clone is successful,
+     * the key word will be found.
+     */
+    @Test void cloneTest() throws GitAPIException, IOException {
+        String realString = "testString";
+        model.cloneRepo("https://github.com/arnbaeck/assig2", "testing1");
+        File file = new File("C:\\Users\\Anton\\Documents\\GitHub\\assig2\\app\\assig2\\app\\src\\test\\java\\assig2\\test.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        String s = br.readLine();
+        assertEquals(s, realString);
     }
 
 }
